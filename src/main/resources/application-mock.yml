@@ -1,0 +1,29 @@
+spring:
+  cloud:
+    gateway:
+      enabled: true
+
+      routes:
+        - id: find-my-ip
+          uri: https://httpbin.org/ip
+          predicates:
+            - Path=/ip
+        - id: mock-find-user-by-id
+          uri: mock://findUserById
+          predicates:
+            - Path=/users/{id}
+
+
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+
+
+
+
